@@ -3,7 +3,7 @@
         <nav aria-label="breadcrumb" role="navigation">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a routerLink="/mayoristas">Mayoristas</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Formulario de Registro</li>
+                <li class="breadcrumb-item active" aria-current="page">Formulario de Mayorista</li>
             </ol>
         </nav>
     </div>
@@ -16,7 +16,7 @@
                 <h6 style="margin-bottom: 0; font-weight: 600;">Formulario de Registro</h6>
                 <p style="font-size: 13px;">Complete los campos correctamente
                 </p>
-                <form [formGroup]="form" (submit)="registrar($event)" autocomplete="off">
+                <form [formGroup]="form" (submit)="onSubmit($event)" autocomplete="off">
                     <div class="row">
                         <div class="col-4">
                             <div class="form-group">
@@ -98,7 +98,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" *ngIf="!isEditForm">
                         <div class="col-4">
                             <div class="form-group">
                                 <label for="txtDepartamento">Departamento<span class="required"> * </span></label>
@@ -171,10 +171,16 @@
                     </div>
                     <div class="row">
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary" [disabled]="loading">
+                            <button type="submit" class="btn btn-primary" [disabled]="loading" *ngIf="!isEditForm">
                                 <span *ngIf="!loading; else elseLoading">Registrar</span>
                                 <ng-template #elseLoading>
                                     <span>Guardando...</span>
+                                </ng-template>
+                            </button>
+                            <button type="submit" class="btn btn-primary" [disabled]="loading" *ngIf="isEditForm">
+                                <span *ngIf="!loading; else elseLoadingEdit">Editar</span>
+                                <ng-template #elseLoadingEdit>
+                                    <span>Editando...</span>
                                 </ng-template>
                             </button>
                             <button type="button" class="btn btn-default" style="margin-left: 15px;"
