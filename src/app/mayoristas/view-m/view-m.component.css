@@ -1,0 +1,48 @@
+.card-img{
+    position: relative;
+    padding-top: 60px;
+}
+
+.card-img img{
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.info-list{
+    list-style: none !important; 
+    padding: 0; 
+    margin: 0
+}
+
+.info-list li{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 13px;
+}
+
+.info-attr{
+    font-size: 13px;
+}
+
+h5 i{
+   margin-right: 15px;
+}
+
+.float-button{
+    position: fixed;
+    right: 20px;
+    bottom: 30px;
+}
+
+.badge-message{
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: tomato;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}

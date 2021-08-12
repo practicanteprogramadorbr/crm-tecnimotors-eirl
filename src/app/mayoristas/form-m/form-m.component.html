@@ -1,0 +1,188 @@
+<div class="row my-4">
+    <div class="col-12">
+        <nav aria-label="breadcrumb" role="navigation">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a routerLink="/mayoristas">Mayoristas</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Formulario de Registro</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-12 col-md-9 mx-auto">
+        <div class="card animate__animated animate__fadeIn">
+            <div class="card-body shadow">
+                <h6 style="margin-bottom: 0; font-weight: 600;">Formulario de Registro</h6>
+                <p style="font-size: 13px;">Complete los campos correctamente
+                </p>
+                <form [formGroup]="form" (submit)="registrar($event)" autocomplete="off">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="txtNombres">Nombres<span class="required"> * </span></label>
+                                <input type="text" name="nombres" class="form-control has-danger" id="txtNombres"
+                                    placeholder="Ej. Jefferson" formControlName="nombres"
+                                    [ngClass]="{'is-invalid': isInvalid('nombres')}">
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="txtApellidoPaterno">Apellido Paterno<span class="required"> *
+                                    </span></label>
+                                <input type="text" name="ap_paterno" class="form-control" id="txtApellidoPaterno"
+                                    placeholder="Ej. Ledesma" formControlName="ap_paterno"
+                                    [ngClass]="{'is-invalid': isInvalid('ap_paterno')}">
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="txtApellidoMaterno">Apellido Materno<span class="required"> *
+                                    </span></label>
+                                <input type="text" name="ap_materno" class="form-control" id="txtApellidoMaterno"
+                                    placeholder="Ej. Naupa" formControlName="ap_materno"
+                                    [ngClass]="{'is-invalid': isInvalid('ap_materno')}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="txtEmail">Email</label>
+                                <input type="email" name="email" class="form-control" id="txtEmail"
+                                    placeholder="Ej. ejemplo@gmail.com" formControlName="email">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="txtRazonSocial">Razón Social</label>
+                                <input type="text" name="razon_social" class="form-control" id="txtRazonSocial"
+                                    placeholder="Ej. Grupo Tecnimotors EIRL" formControlName="razon_social">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="txtRUC">RUC</label>
+                                <input type="text" name="ruc" class="form-control" id="txtRUC"
+                                    placeholder="Ej. 10740505110" formControlName="ruc">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="txtCelular">Celular<span class="required"> * </span></label>
+                                <input type="text" name="celular" class="form-control" id="txtCelular"
+                                    placeholder="Ej. 965181692" formControlName="celular"
+                                    [ngClass]="{'is-invalid': isInvalid('celular')}">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="txtTelefono">Teléfono Fijo</label>
+                                <input type="text" name="telef_fijo" class="form-control" id="txtTelefono"
+                                    placeholder="Ej. 3304083" formControlName="telef_fijo">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="txtDireccion">Dirección<span class="required"> * </span></label>
+                                <input type="text" name="direccion_cliente" class="form-control" id="txtDireccion"
+                                    placeholder="Ej. Av. Iquitos 442-446-448 Distrito la Victoria, Lima, Perú"
+                                    formControlName="direccion_cliente"
+                                    [ngClass]="{'is-invalid': isInvalid('direccion_cliente')}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="txtDepartamento">Departamento<span class="required"> * </span></label>
+                                <select name="departamento" id="txtDepartamento" class="form-control"
+                                    formControlName="departamento" [ngClass]="{'is-invalid': isInvalid('departamento')}"
+                                    (change)="listarProvincias($event.target)">
+                                    <option value="" selected>Seleccionar</option>
+                                    <option [value]="departamento.nombre" [attr.id]="departamento.departamento_id"
+                                        *ngFor="let departamento of departamentos">{{
+                                        departamento.nombre
+                                        }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="txtProvincia">Provincia<span class="required"> * </span></label>
+                                <select name="provincia" id="txtProvincia" class="form-control"
+                                    formControlName="provincia" [ngClass]="{'is-invalid': isInvalid('provincia')}"
+                                    (change)="listarDistritos($event.target)">
+                                    <option value="" selected>Seleccionar</option>
+                                    <option [value]="provincia.nombre" [attr.id]="provincia.provincia_id"
+                                        *ngFor="let provincia of provincias">
+                                        {{ provincia.nombre }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="txtDistrito">Distrito<span class="required"> * </span></label>
+                                <select name="distrito" id="txtDistrito" class="form-control" formControlName="distrito"
+                                    [ngClass]="{'is-invalid': isInvalid('distrito')}">
+                                    <option value="" selected>Seleccionar</option>
+                                    <option [value]="distrito.nombre" *ngFor="let distrito of distritos">
+                                        {{ distrito.nombre }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="txtFechaNacimiento">Fecha de Nacimiento</label>
+                                <input type="date" name="fecha_nacimiento" class="form-control" id="txtFechaNacimiento"
+                                    placeholder="Ej. Grupo Tecnimotors EIRL" formControlName="fecha_nacimiento">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="txtGenero">Género<span class="required"> * </span></label>
+                                <div class="d-flex">
+                                    <div class="custom-control custom-radio mb-3">
+                                        <input name="custom-radio-1" name="genero" value="Masculino"
+                                            class="custom-control-input" id="txtMasculino" type="radio"
+                                            formControlName="genero" [ngClass]="{'is-invalid': isInvalid('genero')}">
+                                        <label class="custom-control-label" for="txtMasculino">Masculino</label>
+                                    </div>
+                                    <div class="custom-control custom-radio mb-3" style="margin-left: 20px;">
+                                        <input name="custom-radio-1" name="genero" value="Femenino"
+                                            class="custom-control-input" id="txtFemenino" checked="" type="radio"
+                                            formControlName="genero" [ngClass]="{'is-invalid': isInvalid('genero')}" >
+                                        <label class="custom-control-label" for="txtFemenino">Femenino</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary" [disabled]="loading">
+                                <span *ngIf="!loading; else elseLoading">Registrar</span>
+                                <ng-template #elseLoading>
+                                    <span>Guardando...</span>
+                                </ng-template>
+                            </button>
+                            <button type="button" class="btn btn-default" style="margin-left: 15px;"
+                                routerLink="/mayoristas">Cancelar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
