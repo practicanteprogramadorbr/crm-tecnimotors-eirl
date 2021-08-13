@@ -1,3 +1,5 @@
+import Fuente from "./Fuente";
+
 export default interface Mayorista {
     id: number;
     nombres?: string;
@@ -8,7 +10,7 @@ export default interface Mayorista {
     telef_fijo?: string;
     ruc?: string;
     razon_social?: string;
-    estado:boolean;
+    estado: boolean;
     email?: string;
     direccion_cliente?: string;
     complemento_direccion?: string;
@@ -22,5 +24,6 @@ export default interface Mayorista {
     proteccion_datos?: boolean;
     estado_id: number;
     fuente_id: number;
-    vendedor_id:number;
+    vendedor_id: number;
+    fuente: Fuente;
 }

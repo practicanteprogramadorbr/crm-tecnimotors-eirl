@@ -15,7 +15,11 @@
             <div class="col-9">
                 <div class="card animate__animated animate__fadeIn">
                     <div class="card-body shadow">
-                        <h6 style="margin-bottom: 0; font-weight: 600;">Formulario de Registro</h6>
+                        <h6 style="margin-bottom: 0; font-weight: 600;" *ngIf="!isEditForm; else elseEdicion">Formulario
+                            de Registro</h6>
+                        <ng-template #elseEdicion>
+                            <h6 style="margin-bottom: 0; font-weight: 600;" #elseEdicion>Formulario de Edición</h6>
+                        </ng-template>
                         <p style="font-size: 13px;">Complete los campos correctamente
                         </p>
                         <div class="row">
@@ -246,7 +250,7 @@
                                 [attr.id]="'rdoFuente'+i" type="radio"
                                 [ngClass]="{'is-invalid': isInvalid('fuente_id')}" formControlName="fuente_id">
                             <label class="custom-control-label" [attr.for]="'rdoFuente'+i">{{ fuente.nombre }}</label>
-                            
+
                         </div>
                         <div *ngIf="isInvalid('fuente_id')">
                             <span class="input-error" *ngIf="getControl('fuente_id').errors?.required">

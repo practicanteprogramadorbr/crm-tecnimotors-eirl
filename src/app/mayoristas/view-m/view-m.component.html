@@ -47,7 +47,7 @@
 
                         </div>
                         <hr>
-                        <div class="row mb-5">
+                        <div class="row" style="margin-bottom: 2rem;">
                             <div class="col">
                                 <strong>Razón Social</strong>
                                 <div class="mt-3">{{ mayorista.razon_social | titlecase }}</div>
@@ -96,8 +96,8 @@
                         <ng-template #elseGenero>
                             <img src="assets/img/avatar-masculino.png" width="40%" alt="avatar">
                         </ng-template>
-                        <div class="text-center" style="font-weight: 600; color: #868686; font-size: 15px;">Tecnimotors
-                            EIRL
+                        <div class="text-center" style="font-weight: 600; color: #868686; font-size: 15px;">
+                            {{ mayorista.razon_social }}
                         </div>
                         <h6 class="my-3 text-center">{{ mayorista.nombres }} {{ mayorista.ap_paterno }} {{
                             mayorista.ap_materno }}</h6>

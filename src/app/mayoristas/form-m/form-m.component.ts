@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import Departamento from 'src/app/interfaces/Departamento';
 import Distrito from 'src/app/interfaces/Distrito';
 import Fuente from 'src/app/interfaces/Fuente';
@@ -15,7 +16,7 @@ import Swal from 'sweetalert2';
   templateUrl: './form-m.component.html',
   styleUrls: ['./form-m.component.css']
 })
-export class FormMComponent implements OnInit {
+export class FormMComponent implements OnInit, OnDestroy {
 
   return: string = '/mayoristas';
   form: FormGroup;
@@ -26,7 +27,15 @@ export class FormMComponent implements OnInit {
 
   loading: boolean = false;
   isEditForm: boolean = false;
-  mayorista_a_actualizar: Mayorista;
+  mayorista: Mayorista;
+
+  sub1: Subscription;
+  sub2: Subscription;
+  sub3: Subscription;
+  sub4: Subscription;
+  sub5: Subscription;
+  sub6: Subscription;
+  subscriptions: Subscription[] = [];
 
   constructor(private fb: FormBuilder,
     private direccionService: DireccionService,
@@ -39,6 +48,12 @@ export class FormMComponent implements OnInit {
     this.fuentes = [];
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((sub: Subscription) => {
+      sub.unsubscribe()
+    });
+  }
+
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       this.form = this.createForm();
@@ -46,8 +61,7 @@ export class FormMComponent implements OnInit {
       this.listarDepartamentos();
       if (params.id) {
         this.clienteService.buscarPorId(params.id).subscribe((cliente: any) => {
-          this.mayorista_a_actualizar = Object.assign({}, cliente);
-          delete cliente.id;
+          this.mayorista = Object.assign({}, cliente);
           this.form.setValue(cliente);
           this.isEditForm = true;
         }, err => {
@@ -64,6 +78,7 @@ export class FormMComponent implements OnInit {
 
   createForm() {
     return this.fb.group({
+      id: this.fb.control(''),
       nombres: this.fb.control('', Validators.required),
       ap_paterno: this.fb.control('', Validators.required),
       ap_materno: this.fb.control('', Validators.required),
@@ -90,9 +105,10 @@ export class FormMComponent implements OnInit {
   }
 
   listarDepartamentos() {
-    this.direccionService.getDepartamentos().subscribe(departamentos => {
+    this.sub1 = this.direccionService.getDepartamentos().subscribe(departamentos => {
       this.departamentos = departamentos;
     });
+    this.subscriptions.push(this.sub1);
   }
 
   listarProvincias(select: any) {
@@ -105,11 +121,12 @@ export class FormMComponent implements OnInit {
       this.distritos = [];
       return;
     };
-    this.direccionService.getProvincias(departamento_id).subscribe(provincias => {
+    this.sub2 = this.direccionService.getProvincias(departamento_id).subscribe(provincias => {
       this.getControl('provincia').reset("");
       this.provincias = provincias;
       this.distritos = [];
     });
+    this.subscriptions.push(this.sub2);
   }
 
   listarDistritos(select: any) {
@@ -120,10 +137,11 @@ export class FormMComponent implements OnInit {
       this.distritos = [];
       return;
     };
-    this.direccionService.getDistritos(provincia_id).subscribe(distritos => {
+    this.sub3 = this.direccionService.getDistritos(provincia_id).subscribe(distritos => {
       this.getControl('distrito').reset("");
       this.distritos = distritos;
     });
+    this.subscriptions.push(this.sub3);
   }
 
   onSubmit(e: Event) {
@@ -141,7 +159,7 @@ export class FormMComponent implements OnInit {
 
   registrar() {
     this.loading = true;
-    this.clienteService.registrar(this.form.value).subscribe(cliente => {
+    this.sub5 = this.clienteService.registrar(this.form.value).subscribe(cliente => {
       this.loading = false;
       Swal.fire({
         icon: 'success',
@@ -157,11 +175,12 @@ export class FormMComponent implements OnInit {
       );
       console.log(err);
     });
+    this.subscriptions.push(this.sub5);
   }
 
   editar() {
     this.loading = true;
-    this.clienteService.actualizarDatos(this.mayorista_a_actualizar.id, this.form.value)
+    this.sub6 = this.clienteService.actualizarDatos(this.mayorista.id, this.form.value)
       .subscribe(cliente => {
         this.loading = false;
         Swal.fire({
@@ -178,12 +197,14 @@ export class FormMComponent implements OnInit {
         );
         console.log(err);
       });
+    this.subscriptions.push(this.sub6);
   }
 
-  obtenerFuentes(){
-    this.clienteService.obtenerFuentes().subscribe(fuentes => {
+  obtenerFuentes() {
+    this.sub4 = this.clienteService.obtenerFuentes().subscribe(fuentes => {
       this.fuentes = fuentes;
     });
+    this.subscriptions.push(this.sub4);
   }
 
   getControl(name: string): AbstractControl {

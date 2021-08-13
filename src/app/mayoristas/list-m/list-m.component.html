@@ -25,6 +25,7 @@
                             <th scope="col">Razon Social y/o RUC</th>
                             <th scope="col">Celular</th>
                             <th scope="col">Estado</th>
+                            <th scope="col">Fuente</th>
                             <th scope="col">Registro</th>
                             <th></th>
                         </tr>
@@ -48,6 +49,9 @@
                                     <span class="badge badge-danger" *ngSwitchCase="3">Falso</span>
                                     <span *ngSwitchDefault>Sin especificar</span>
                                 </div>
+                            </td>
+                            <td class="text-center">
+                                <i [class]="mayorista.fuente.icono + ' fuente-icon'" [ngStyle]="{'color': mayorista.fuente.color}"></i>
                             </td>
                             <td>{{ mayorista.fecha_registro | date:'dd/MM/YYYY' }}</td>
                             <td>

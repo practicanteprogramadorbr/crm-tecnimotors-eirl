@@ -26,16 +26,15 @@ export class ListMComponent implements OnInit, OnDestroy {
     this.sub2.unsubscribe();
   }
 
-  recibir() {
-    this.sub2 = this.clienteService.recibir$().subscribe((mayorista: Mayorista) => {
-      console.log(mayorista);
-      this.mayoristas.unshift(mayorista);
-    });
-  }
-
   listar() {
     this.sub1 = this.clienteService.listar().subscribe((mayoristas) => {
       this.mayoristas = mayoristas;
+    });
+  }
+
+  recibir() {
+    this.sub2 = this.clienteService.recibir$().subscribe((mayorista: Mayorista) => {
+      this.mayoristas.unshift(mayorista);
     });
   }
 
