@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 import { ActivatedRoute, Router } from '@angular/router';
 import Departamento from 'src/app/interfaces/Departamento';
 import Distrito from 'src/app/interfaces/Distrito';
+import Fuente from 'src/app/interfaces/Fuente';
 import Mayorista from 'src/app/interfaces/Mayorista';
 import Provincia from 'src/app/interfaces/Provincia';
 import { ClienteService } from 'src/app/services/cliente.service';
@@ -21,6 +22,7 @@ export class FormMComponent implements OnInit {
   departamentos: Departamento[];
   provincias: Provincia[]
   distritos: Distrito[];
+  fuentes: Fuente[];
 
   loading: boolean = false;
   isEditForm: boolean = false;
@@ -34,11 +36,13 @@ export class FormMComponent implements OnInit {
     this.departamentos = [];
     this.provincias = [];
     this.distritos = [];
+    this.fuentes = [];
   }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       this.form = this.createForm();
+      this.obtenerFuentes();
       this.listarDepartamentos();
       if (params.id) {
         this.clienteService.buscarPorId(params.id).subscribe((cliente: any) => {
@@ -79,7 +83,9 @@ export class FormMComponent implements OnInit {
       ciudad: this.fb.control(null),
       comentario_reg_cliente: this.fb.control(null),
       proteccion_datos: this.fb.control(true),
-      estado_id: this.fb.control(null)
+      estado_id: this.fb.control(1), // Pendiente = 1; Valor Predeterminado
+      fuente_id: this.fb.control(null, Validators.required),
+      vendedor_id: this.fb.control(null)
     });
   }
 
@@ -172,6 +178,12 @@ export class FormMComponent implements OnInit {
         );
         console.log(err);
       });
+  }
+
+  obtenerFuentes(){
+    this.clienteService.obtenerFuentes().subscribe(fuentes => {
+      this.fuentes = fuentes;
+    });
   }
 
   getControl(name: string): AbstractControl {

@@ -1,39 +1,41 @@
-<div class="row my-4">
-    <div class="col-4">
-        <div class="card shadow">
-            <div class="card-body">
-                <div>Clientes Mayoristas</div>
-                <strong style="font-size: 30px;">193</strong>
+<div class="container">
+    <div class="row my-4">
+        <div class="col-4">
+            <div class="card shadow">
+                <div class="card-body">
+                    <div>Clientes Mayoristas</div>
+                    <strong style="font-size: 30px;">193</strong>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card shadow">
+                <div class="card-body">
+                    <div>Clientes Finales</div>
+                    <strong style="font-size: 30px;">0</strong>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-4">
-        <div class="card shadow">
-            <div class="card-body">
-                <div>Clientes Finales</div>
-                <strong style="font-size: 30px;">0</strong>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row my-4">
-    <div class="col-8">
-        <div class="card shadow">
-            <div class="card-body pb-0" #ContainerRef>
-                <h6 class="mb-3" style="font-weight: 600;">Visión General de Mayoristas</h6>
-                <ngx-charts-line-chart
-                    [view]="[ContainerRef.offsetWidth - 50, 360]"
-                    [scheme]="colorScheme"
-                    [showXAxisLabel]="showXAxisLabel"
-                    [showYAxisLabel]="showYAxisLabel"
-                    [xAxis]="xAxis"
-                    [yAxis]="yAxis"
-                    [xAxisLabel]="xAxisLabel"
-                    [yAxisLabel]="yAxisLabel"
-                    [timeline]="timeline"
-                    [results]="multi"
-                    >
-                </ngx-charts-line-chart>
+    <div class="row my-4">
+        <div class="col-8">
+            <div class="card shadow">
+                <div class="card-body pb-0" #ContainerRef>
+                    <h6 class="mb-3" style="font-weight: 600;">Visión General de Mayoristas</h6>
+                    <ngx-charts-line-chart
+                        [view]="[ContainerRef.offsetWidth - 50, 360]"
+                        [scheme]="colorScheme"
+                        [showXAxisLabel]="showXAxisLabel"
+                        [showYAxisLabel]="showYAxisLabel"
+                        [xAxis]="xAxis"
+                        [yAxis]="yAxis"
+                        [xAxisLabel]="xAxisLabel"
+                        [yAxisLabel]="yAxisLabel"
+                        [timeline]="timeline"
+                        [results]="multi"
+                        >
+                    </ngx-charts-line-chart>
+                </div>
             </div>
         </div>
     </div>

@@ -7,7 +7,7 @@ import { FormMComponent } from './form-m/form-m.component';
 import { ListMComponent } from './list-m/list-m.component';
 import { MayoristasComponent } from './mayoristas.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NotifierModule } from 'angular-notifier';
 
 

@@ -1,162 +1,167 @@
-<notifier-container></notifier-container>
+<div class="container">
+    <notifier-container></notifier-container>
 
-<ng-container *ngIf="mayorista">
-    <nav class="mt-4" aria-label="breadcrumb" role="navigation">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a routerLink="/mayoristas">Dashboard</a></li>
-            <li class="breadcrumb-item"><a routerLink="/mayoristas/list">Mayoristas</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Información de {{ mayorista.nombres }}</li>
-        </ol>
-    </nav>
-    <button class="btn btn-lg btn-primary btn-icon-only rounded-circle float-button " type="button"
-        data-bs-toggle="modal" data-bs-target="#exampleModal" style="z-index: 100;">
-        <span class="btn-inner--icon"><i class="fas fa-comment"></i></span>
-        <div class="badge-message" *ngIf="mayorista.comentario_reg_cliente; else elseComentario">1</div>
-        <ng-template #elseComentario>
-            <span class="badge-message">0</span>
-        </ng-template>
-    </button>
+    <ng-container *ngIf="mayorista">
+        <nav class="mt-4" aria-label="breadcrumb" role="navigation">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a routerLink="/mayoristas">Dashboard</a></li>
+                <li class="breadcrumb-item"><a routerLink="/mayoristas/list">Mayoristas</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Información de {{ mayorista.nombres }}</li>
+            </ol>
+        </nav>
+        <button class="btn btn-lg btn-primary btn-icon-only rounded-circle float-button " type="button"
+            data-bs-toggle="modal" data-bs-target="#exampleModal" style="z-index: 100;">
+            <span class="btn-inner--icon"><i class="fas fa-comment"></i></span>
+            <div class="badge-message" *ngIf="mayorista.comentario_reg_cliente; else elseComentario">1</div>
+            <ng-template #elseComentario>
+                <span class="badge-message">0</span>
+            </ng-template>
+        </button>
 
-    <div class="row mb-4">
-        <div class="col-8 my-6">
-            <div class="card shadow animate__animated animate__fadeIn">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <h5><i class="far fa-building"></i>Datos de la Empresa</h5>
-                        <div [ngSwitch]="mayorista.estado_id">
-                            <div class="d-flex align-items-center" *ngSwitchCase="1">
-                                <span class="badge badge-primary">Pendiente</span>
-                                <label class="custom-toggle" style="margin-left: 20px;" data-toggle="tooltip"
-                                    data-placement="top" title="Marcar como atendido" data-container="body"
-                                    data-animation="true">
-                                    <input type="checkbox" (change)="onStatusChange(2, 'Mayorista atendido', 'success');">
-                                    <span class="custom-toggle-slider rounded-circle"></span>
-                                </label>
-                            </div>
-                            <div *ngSwitchCase="2">
-                                <span class="badge badge-success" *ngSwitchCase="2">Atendido</span>
-                            </div>
-                            <span class="badge badge-danger" *ngSwitchCase="3">Falso</span>
-                            <div *ngSwitchDefault>
-                                Sin Especificar
-                            </div>
-                        </div>
-
-
-                    </div>
-                    <hr>
-                    <div class="row mb-5">
-                        <div class="col">
-                            <strong>Razón Social</strong>
-                            <div class="mt-3">{{ mayorista.razon_social | titlecase }}</div>
-                        </div>
-                        <div class="col">
-                            <strong>RUC</strong>
-                            <div class="mt-3">{{ mayorista.ruc }}</div>
-                        </div>
-                    </div>
-                    <h5><i class="fas fa-map-marker-alt"></i>Dirección</h5>
-                    <hr>
-                    <div class="row mb-4">
-                        <div class="col">
-                            <div class="row">
-                                <div class="col-4">
-                                    <strong>Dirección Completa</strong>
+        <div class="row mb-4">
+            <div class="col-8 my-6">
+                <div class="card shadow animate__animated animate__fadeIn">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <h5><i class="far fa-building"></i>Datos de la Empresa</h5>
+                            <div [ngSwitch]="mayorista.estado_id">
+                                <div class="d-flex align-items-center" *ngSwitchCase="1">
+                                    <span class="badge badge-primary">Pendiente</span>
+                                    <label class="custom-toggle" style="margin-left: 20px;" data-toggle="tooltip"
+                                        data-placement="top" title="Marcar como atendido" data-container="body"
+                                        data-animation="true">
+                                        <input type="checkbox"
+                                            (change)="onStatusChange(2, 'Mayorista atendido', 'success');">
+                                        <span class="custom-toggle-slider rounded-circle"></span>
+                                    </label>
                                 </div>
-                                <div class="col">
-                                    {{ mayorista.direccion_cliente }}
+                                <div *ngSwitchCase="2">
+                                    <span class="badge badge-success" *ngSwitchCase="2">Atendido</span>
+                                </div>
+                                <span class="badge badge-danger" *ngSwitchCase="3">Falso</span>
+                                <div *ngSwitchDefault>
+                                    Sin Especificar
                                 </div>
                             </div>
+
+
+                        </div>
+                        <hr>
+                        <div class="row mb-5">
+                            <div class="col">
+                                <strong>Razón Social</strong>
+                                <div class="mt-3">{{ mayorista.razon_social | titlecase }}</div>
+                            </div>
+                            <div class="col">
+                                <strong>RUC</strong>
+                                <div class="mt-3">{{ mayorista.ruc }}</div>
+                            </div>
+                        </div>
+                        <h5><i class="fas fa-map-marker-alt"></i>Dirección</h5>
+                        <hr>
+                        <div class="row mb-4">
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <strong>Dirección Completa</strong>
+                                    </div>
+                                    <div class="col">
+                                        {{ mayorista.direccion_cliente }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <strong>Departamento</strong>
+                                <div class="mt-3">{{ mayorista.departamento }}</div>
+                            </div>
+                            <div class="col">
+                                <strong>Provincia</strong>
+                                <div class="mt-3">{{ mayorista.provincia }}</div>
+                            </div>
+                            <div class="col">
+                                <strong>Distrito</strong>
+                                <div class="mt-3">{{ mayorista.distrito }}</div>
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col">
-                            <strong>Departamento</strong>
-                            <div class="mt-3">{{ mayorista.departamento }}</div>
+                </div>
+            </div>
+            <div class="col-4 mt-6">
+                <div class="card shadow card-img animate__animated animate__fadeIn">
+                    <div class="card-body">
+                        <img src="assets/img/avatar-femenino.png" width="40%" alt="avatar"
+                            *ngIf="mayorista.genero=='Femenino'; else elseGenero">
+                        <ng-template #elseGenero>
+                            <img src="assets/img/avatar-masculino.png" width="40%" alt="avatar">
+                        </ng-template>
+                        <div class="text-center" style="font-weight: 600; color: #868686; font-size: 15px;">Tecnimotors
+                            EIRL
                         </div>
-                        <div class="col">
-                            <strong>Provincia</strong>
-                            <div class="mt-3">{{ mayorista.provincia }}</div>
-                        </div>
-                        <div class="col">
-                            <strong>Distrito</strong>
-                            <div class="mt-3">{{ mayorista.distrito }}</div>
+                        <h6 class="my-3 text-center">{{ mayorista.nombres }} {{ mayorista.ap_paterno }} {{
+                            mayorista.ap_materno }}</h6>
+                        <hr>
+                        <p>Información de contacto</p>
+                        <ul class="info-list">
+                            <li>
+                                <i class="fas fa-envelope" style="margin-right: 15px;"></i>
+                                <span class="info-attr">{{ mayorista.email }}</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-mobile-alt" style="margin-right: 15px;"></i>
+                                <span class="info-attr">{{ mayorista.celular }}</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone" style="margin-right: 15px;"></i>
+                                <span class="info-attr">{{ mayorista.telef_fijo }}</span>
+                            </li>
+                        </ul>
+                        <hr>
+                        <p>Datos adicionales</p>
+                        <ul class="info-list">
+                            <li>
+                                <i class="fas fa-calendar" style="margin-right: 15px;"></i>
+                                <span class="info-attr">{{ mayorista.fecha_nacimiento }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <h5>Zona de Peligro</h5>
+                <div class="card" style="border: 1px solid tomato;">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <strong>Falso Mayorista</strong>
+                                <div>Una vez marcado como falso, no hay vuelta atrás</div>
+                            </div>
+                            <button class="btn btn-outline-danger"
+                                (click)="onStatusChange(3, 'Marcado como Falso', 'error');" [disabled]="loading">
+                                <span *ngIf="!loading">Falso Mayorista</span>
+                                <span *ngIf="loading">Guardando...</span>
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-4 mt-6">
-            <div class="card shadow card-img animate__animated animate__fadeIn">
-                <div class="card-body">
-                    <img src="assets/img/avatar-femenino.png" width="40%" alt="avatar"
-                        *ngIf="mayorista.genero=='Femenino'; else elseGenero">
-                    <ng-template #elseGenero>
-                        <img src="assets/img/avatar-masculino.png" width="40%" alt="avatar">
-                    </ng-template>
-                    <div class="text-center" style="font-weight: 600; color: #868686; font-size: 15px;">Tecnimotors EIRL
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Comentario de Registro</h5>
                     </div>
-                    <h6 class="my-3 text-center">{{ mayorista.nombres }} {{ mayorista.ap_paterno }} {{
-                        mayorista.ap_materno }}</h6>
-                    <hr>
-                    <p>Información de contacto</p>
-                    <ul class="info-list">
-                        <li>
-                            <i class="fas fa-envelope" style="margin-right: 15px;"></i>
-                            <span class="info-attr">{{ mayorista.email }}</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-mobile-alt" style="margin-right: 15px;"></i>
-                            <span class="info-attr">{{ mayorista.celular }}</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-phone" style="margin-right: 15px;"></i>
-                            <span class="info-attr">{{ mayorista.telef_fijo }}</span>
-                        </li>
-                    </ul>
-                    <hr>
-                    <p>Datos adicionales</p>
-                    <ul class="info-list">
-                        <li>
-                            <i class="fas fa-calendar" style="margin-right: 15px;"></i>
-                            <span class="info-attr">{{ mayorista.fecha_nacimiento }}</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-12">
-            <h5>Zona de Peligro</h5>
-            <div class="card" style="border: 1px solid tomato;">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <strong>Falso Mayorista</strong>
-                            <div>Una vez marcado como falso, no hay vuelta atrás</div>
-                        </div>
-                        <button class="btn btn-outline-danger" (click)="onStatusChange(3, 'Marcado como Falso', 'error');" [disabled]="loading">
-                            <span *ngIf="!loading">Falso Mayorista</span>
-                            <span *ngIf="loading">Guardando...</span>
-                        </button>
+                    <div class="modal-body">
+                        {{ mayorista.comentario_reg_cliente }}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Comentario de Registro</h5>
-                </div>
-                <div class="modal-body">
-                    {{ mayorista.comentario_reg_cliente }}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</ng-container>
+    </ng-container>
+</div>

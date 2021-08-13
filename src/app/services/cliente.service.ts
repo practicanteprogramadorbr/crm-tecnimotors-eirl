@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import Mayorista from '../interfaces/Mayorista';
 import { RestService } from './rest.service';
 import { SocketService } from './socket.service';
+import Fuente from '../interfaces/Fuente';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,10 @@ export class ClienteService extends RestService {
 
   actualizarDatos(id: number, datos_actualizados: Mayorista) {
     return this.http.put<Mayorista>(this.baseUrl + `/mayoristas/${id}`, datos_actualizados);
+  }
+
+  obtenerFuentes(){
+    return this.http.get<Fuente[]>(this.baseUrl + '/fuentes');
   }
 
 }

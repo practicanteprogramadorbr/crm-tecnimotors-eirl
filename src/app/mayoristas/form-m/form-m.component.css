@@ -5,3 +5,8 @@
 .form-control{
     color: #212121 !important;
 }
+
+.input-error{
+    color: tomato;
+    font-size: 12px;
+}

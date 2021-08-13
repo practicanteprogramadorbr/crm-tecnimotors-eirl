@@ -21,4 +21,6 @@ export default interface Mayorista {
     genero?: string;
     proteccion_datos?: boolean;
     estado_id: number;
+    fuente_id: number;
+    vendedor_id:number;
 }
