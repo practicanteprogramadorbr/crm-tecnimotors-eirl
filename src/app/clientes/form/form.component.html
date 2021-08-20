@@ -1,1 +1,193 @@
-<p>form works!</p>
+<div class="container">
+    <div class="row my-4">
+        <div class="col-12">
+            <nav aria-label="breadcrumb" role="navigation">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a routerLink="/mayoristas">Clientes Finales</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Formulario de Clientes Finales</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <form [formGroup]="finalesForm" (submit)="onSubmit($event)" autocomplete="off" class="mb-4"
+        style="position: relative;">
+        <div class="row">
+            <div class="col-9">
+                <div class="card animate__animated animate__fadeIn">
+                    <div class="card-body shadow">
+                        <h6 style="margin-bottom: 0; font-weight: 600;">Formulario de Registro</h6>
+                        <p style="font-size: 13px;">Complete los campos correctamente</p>
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="txtNombres">Nombres<span class="required"> * </span></label>
+                                    <input type="text" name="nombres" class="form-control has-danger" id="txtNombres"
+                                        placeholder="Ej. Jefferson" formControlName="nombres"
+                                        [ngClass]="{'is-invalid': isInvalid('nombres')}">
+                                    <div *ngIf="isInvalid('nombres')">
+                                        <span class="input-error" *ngIf="getControl('nombres').errors?.required">
+                                            Introduzca el nombre del mayorista
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="txtApellidoPaterno">Apellido Paterno<span class="required"> *
+                                        </span></label>
+                                    <input type="text" name="ap_paterno" class="form-control" id="txtApellidoPaterno"
+                                        placeholder="Ej. Ledesma" formControlName="ap_paterno"
+                                        [ngClass]="{'is-invalid': isInvalid('ap_paterno')}">
+                                    <div *ngIf="isInvalid('ap_paterno')">
+                                        <span class="input-error" *ngIf="getControl('ap_paterno').errors?.required">
+                                            Introduzca el apellido del mayorista
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="txtApellidoMaterno">Apellido Materno<span class="required"> *
+                                        </span></label>
+                                    <input type="text" name="ap_materno" class="form-control" id="txtApellidoMaterno"
+                                        placeholder="Ej. Naupa" formControlName="ap_materno"
+                                        [ngClass]="{'is-invalid': isInvalid('ap_materno')}">
+                                    <div *ngIf="isInvalid('ap_materno')">
+                                        <span class="input-error" *ngIf="getControl('ap_materno').errors?.required">
+                                            Introduzca el apellido del mayorista
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="txtCelular" class="label">Celular <span class="required">
+                                            *</span></label>
+                                    <input type="text" name="celular" class="form-control" id="txtCelular"
+                                        placeholder="Ej. 965181692" formControlName="celular" maxlength="9"
+                                        [ngClass]="{'is-invalid': isInvalid('celular')}">
+                                    <div *ngIf="isInvalid('celular')">
+                                        <span class="input-error" *ngIf="getControl('celular').errors?.required">
+                                            Ingrese el número de celular
+                                        </span>
+                                        <span class="input-error" *ngIf="getControl('celular').errors?.maxLength">
+                                            Debe contener 9 dígitos
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="txtCorreo" class="label">Email</label>
+                                    <input type="text" name="correo" class="form-control"
+                                        placeholder="Ej. example@gmail.com" id="txtCorreo" formControlName="correo">
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="txtFechaSolicitud" class="label">Fecha de Solicitud<span
+                                            class="required"> *</span></label>
+                                    <input type="date" name="fecha_solicitud" class="form-control"
+                                        id="txtFechaSolicitud" placeholder="Ej. 20/08/2021"
+                                        formControlName="fecha_solicitud"
+                                        [ngClass]="{'is-invalid': isInvalid('fecha_solicitud')}">
+                                    <div *ngIf="isInvalid('fecha_solicitud')">
+                                        <span class="input-error"
+                                            *ngIf="getControl('fecha_solicitud').errors?.required">
+                                            Seleccione la Fecha de Solicitud
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="txtMoto">Moto</label>
+                                    <select class="form-control" name="moto_id" id="txtMoto" formControlName="moto_id">
+                                        <option value="" selected>Seleccionar</option>
+                                        <option [value]="moto.moto_id" *ngFor="let moto of motos">{{ moto.nombre }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <label for="txtCantidad" class="label">Cantidad</label>
+                                    <input type="number" name="cantidad" class="form-control" value="0" min="0"
+                                        id="txtCantidad" formControlName="cantidad">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="txtRepuesto" class="label">Repuesto</label>
+                                    <input type="text" name="repuestos" class="form-control" id="txtRepuesto"
+                                        placeholder="Ej. Batería" formControlName="repuestos">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-9">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label for="txtBicicleta">Bicicleta</label>
+                                        <select class="form-control" name="bicicleta_id" id="txtBicicleta" formControlName="bicicleta_id">
+                                            <option value="" selected>Seleccionar</option>
+                                            <option [value]="bicicleta.bicicleta_id" *ngFor="let bicicleta of bicicletas">
+                                                {{
+                                                bicicleta.nombre }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label for="txtNroCotizacion">Nro. de Cotización</label>
+                                    <input type="text" name="nro_cotizacion" class="form-control" placeholder="Ej. 6919"
+                                        formControlName="nro_cotizacion"
+                                        [ngClass]="{'is-invalid': isInvalid('nro_cotizacion')}">
+                                    <div *ngIf="isInvalid('nro_cotizacion')">
+                                        <span class="input-error" *ngIf="getControl('nro_cotizacion').errors?.required">
+                                            Ingrese el número de cotización
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Registrar</button>
+                                    <a type="button" class="btn btn-default" [routerLink]="['/clientes']">Cancelar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h6 class="mb-3">Fuente de Origen:</h6>
+                        <div class="custom-control custom-radio mb-3" *ngFor="let fuente of fuentes; let i=index">
+                            <input name="fuente_id" class="custom-control-input" [value]="fuente.fuente_id"
+                                [attr.id]="'rdoFuente'+i" type="radio"
+                                [ngClass]="{'is-invalid': isInvalid('fuente_id')}" formControlName="fuente_id">
+                            <label class="custom-control-label" [attr.for]="'rdoFuente'+i">{{ fuente.nombre }}</label>
+
+                        </div>
+                        <div *ngIf="isInvalid('fuente_id')">
+                            <span class="input-error" *ngIf="getControl('fuente_id').errors?.required">
+                                Seleccione la fuente de donde proviente el cliente final
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <img src="assets/img/cliente.svg" alt="phone" class="my-6" style="width: 100%;">
+            </div>
+        </div>
+    </form>
+</div>

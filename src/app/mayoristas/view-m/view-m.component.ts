@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import Mayorista from 'src/app/interfaces/Mayorista';
 import { ClienteService } from 'src/app/services/cliente.service';
+import { MayoristaService } from 'src/app/services/mayorista.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -18,14 +19,14 @@ export class ViewMComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private router: Router,
-    private clienteService: ClienteService,
+    private mayoristaService: MayoristaService,
     private notifier: NotifierService) {
   }
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       const id = params.id;
-      this.clienteService.buscarPorId(id).subscribe(mayorista => {
+      this.mayoristaService.buscarPorId(id).subscribe(mayorista => {
         this.mayorista = mayorista;
         console.log(this.mayorista);
       }, err => {
@@ -43,7 +44,7 @@ export class ViewMComponent implements OnInit {
     this.loading = true;
     const payload = Object.assign({}, this.mayorista);
     payload.estado_id = new_status;
-    this.clienteService.actualizarDatos(payload.id, payload)
+    this.mayoristaService.actualizarDatos(payload.id, payload)
       .subscribe(resp => {
         this.loading = false;
         this.mayorista = resp;

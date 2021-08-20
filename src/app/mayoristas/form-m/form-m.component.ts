@@ -7,8 +7,9 @@ import Distrito from 'src/app/interfaces/Distrito';
 import Fuente from 'src/app/interfaces/Fuente';
 import Mayorista from 'src/app/interfaces/Mayorista';
 import Provincia from 'src/app/interfaces/Provincia';
-import { ClienteService } from 'src/app/services/cliente.service';
 import { DireccionService } from 'src/app/services/direccion.service';
+import { GeneralService } from 'src/app/services/general.service';
+import { MayoristaService } from 'src/app/services/mayorista.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -39,7 +40,8 @@ export class FormMComponent implements OnInit, OnDestroy {
 
   constructor(private fb: FormBuilder,
     private direccionService: DireccionService,
-    private clienteService: ClienteService,
+    private mayoristaService: MayoristaService,
+    private generalService: GeneralService,
     private router: Router,
     private activatedRoute: ActivatedRoute) {
     this.departamentos = [];
@@ -60,7 +62,7 @@ export class FormMComponent implements OnInit, OnDestroy {
       this.obtenerFuentes();
       this.listarDepartamentos();
       if (params.id) {
-        this.clienteService.buscarPorId(params.id).subscribe((cliente: any) => {
+        this.mayoristaService.buscarPorId(params.id).subscribe((cliente: any) => {
           this.mayorista = Object.assign({}, cliente);
           this.form.setValue(cliente);
           this.isEditForm = true;
@@ -159,7 +161,7 @@ export class FormMComponent implements OnInit, OnDestroy {
 
   registrar() {
     this.loading = true;
-    this.sub5 = this.clienteService.registrar(this.form.value).subscribe(cliente => {
+    this.sub5 = this.mayoristaService.registrar(this.form.value).subscribe(cliente => {
       this.loading = false;
       Swal.fire({
         icon: 'success',
@@ -180,7 +182,7 @@ export class FormMComponent implements OnInit, OnDestroy {
 
   editar() {
     this.loading = true;
-    this.sub6 = this.clienteService.actualizarDatos(this.mayorista.id, this.form.value)
+    this.sub6 = this.mayoristaService.actualizarDatos(this.mayorista.id, this.form.value)
       .subscribe(cliente => {
         this.loading = false;
         Swal.fire({
@@ -201,7 +203,7 @@ export class FormMComponent implements OnInit, OnDestroy {
   }
 
   obtenerFuentes() {
-    this.sub4 = this.clienteService.obtenerFuentes().subscribe(fuentes => {
+    this.sub4 = this.generalService.obtenerFuentes().subscribe(fuentes => {
       this.fuentes = fuentes;
     });
     this.subscriptions.push(this.sub4);

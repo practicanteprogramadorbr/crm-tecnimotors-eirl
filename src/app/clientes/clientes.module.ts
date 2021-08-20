@@ -6,6 +6,8 @@ import { ViewComponent } from './view/view.component';
 import { FormComponent } from './form/form.component';
 import { ClientesComponent } from './clientes.component';
 import { ListComponent } from './list/list.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import { ListComponent } from './list/list.component';
   ],
   imports: [
     CommonModule,
-    ClientesRoutingModule
+    ClientesRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   exports: [
     ViewComponent,
