@@ -38,30 +38,26 @@
                             </div>
                             <div class="col-4">
                                 <div class="form-group">
-                                    <label for="txtApellidoPaterno">Apellido Paterno<span class="required"> *
-                                        </span></label>
+                                    <label for="txtApellidoPaterno">Apellido Paterno</label>
                                     <input type="text" name="ap_paterno" class="form-control" id="txtApellidoPaterno"
-                                        placeholder="Ej. Ledesma" formControlName="ap_paterno"
-                                        [ngClass]="{'is-invalid': isInvalid('ap_paterno')}">
-                                    <div *ngIf="isInvalid('ap_paterno')">
+                                        placeholder="Ej. Ledesma" formControlName="ap_paterno">
+                                    <!-- <div *ngIf="isInvalid('ap_paterno')">
                                         <span class="input-error" *ngIf="getControl('ap_paterno').errors?.required">
                                             Introduzca el apellido del mayorista
                                         </span>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-group">
-                                    <label for="txtApellidoMaterno">Apellido Materno<span class="required"> *
-                                        </span></label>
+                                    <label for="txtApellidoMaterno">Apellido Materno</label>
                                     <input type="text" name="ap_materno" class="form-control" id="txtApellidoMaterno"
-                                        placeholder="Ej. Naupa" formControlName="ap_materno"
-                                        [ngClass]="{'is-invalid': isInvalid('ap_materno')}">
-                                    <div *ngIf="isInvalid('ap_materno')">
+                                        placeholder="Ej. Naupa" formControlName="ap_materno">
+                                    <!-- <div *ngIf="isInvalid('ap_materno')">
                                         <span class="input-error" *ngIf="getControl('ap_materno').errors?.required">
                                             Introduzca el apellido del mayorista
                                         </span>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -115,28 +111,25 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="txtDireccion">Dirección<span class="required"> * </span></label>
+                                    <label for="txtDireccion">Dirección</label>
                                     <input type="text" name="direccion_cliente" class="form-control" id="txtDireccion"
                                         placeholder="Ej. Av. Iquitos 442-446-448 Distrito la Victoria, Lima, Perú"
-                                        formControlName="direccion_cliente"
-                                        [ngClass]="{'is-invalid': isInvalid('direccion_cliente')}">
-                                    <div *ngIf="isInvalid('direccion_cliente')">
+                                        formControlName="direccion_cliente">
+                                    <!-- <div *ngIf="isInvalid('direccion_cliente')">
                                         <span class="input-error"
                                             *ngIf="getControl('direccion_cliente').errors?.required">
                                             Introduzca la dirección completa
                                         </span>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
                         <div class="row" *ngIf="!isEditForm">
                             <div class="col-4">
                                 <div class="form-group">
-                                    <label for="txtDepartamento">Departamento<span class="required"> * </span></label>
+                                    <label for="txtDepartamento">Departamento</label>
                                     <select name="departamento" id="txtDepartamento" class="form-control"
-                                        formControlName="departamento"
-                                        [ngClass]="{'is-invalid': isInvalid('departamento')}"
-                                        (change)="listarProvincias($event.target)">
+                                        formControlName="departamento" (change)="listarProvincias($event.target)">
                                         <option value="" selected>Seleccionar</option>
                                         <option [value]="departamento.nombre" [attr.id]="departamento.departamento_id"
                                             *ngFor="let departamento of departamentos">{{
@@ -144,47 +137,46 @@
                                             }}
                                         </option>
                                     </select>
-                                    <div *ngIf="isInvalid('departamento')">
+                                    <!-- <div *ngIf="isInvalid('departamento')">
                                         <span class="input-error" *ngIf="getControl('departamento').errors?.required">
                                             Seleccione el departamento
                                         </span>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-group">
-                                    <label for="txtProvincia">Provincia<span class="required"> * </span></label>
+                                    <label for="txtProvincia">Provincia</label>
                                     <select name="provincia" id="txtProvincia" class="form-control"
-                                        formControlName="provincia" [ngClass]="{'is-invalid': isInvalid('provincia')}"
-                                        (change)="listarDistritos($event.target)">
+                                        formControlName="provincia" (change)="listarDistritos($event.target)">
                                         <option value="" selected>Seleccionar</option>
                                         <option [value]="provincia.nombre" [attr.id]="provincia.provincia_id"
                                             *ngFor="let provincia of provincias">
                                             {{ provincia.nombre }}
                                         </option>
                                     </select>
-                                    <div *ngIf="isInvalid('provincia')">
+                                    <!-- <div *ngIf="isInvalid('provincia')">
                                         <span class="input-error" *ngIf="getControl('provincia').errors?.required">
                                             Seleccione la provincia
                                         </span>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-group">
-                                    <label for="txtDistrito">Distrito<span class="required"> * </span></label>
+                                    <label for="txtDistrito">Distrito</label>
                                     <select name="distrito" id="txtDistrito" class="form-control"
-                                        formControlName="distrito" [ngClass]="{'is-invalid': isInvalid('distrito')}">
+                                        formControlName="distrito">
                                         <option value="" selected>Seleccionar</option>
                                         <option [value]="distrito.nombre" *ngFor="let distrito of distritos">
                                             {{ distrito.nombre }}
                                         </option>
                                     </select>
-                                    <div *ngIf="isInvalid('distrito')">
+                                    <!-- <div *ngIf="isInvalid('distrito')">
                                         <span class="input-error" *ngIf="getControl('distrito').errors?.required">
                                             Seleccione el distrito
                                         </span>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
