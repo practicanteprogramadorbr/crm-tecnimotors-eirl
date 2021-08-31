@@ -8,10 +8,13 @@ import { DashboardService } from '../services/dashboard.service';
 })
 export class DashboardComponent implements OnInit {
 
+  total_mayoristas: number = 0;
+
   constructor(private dshService: DashboardService) { }
 
   ngOnInit(): void {
     this.getVistaGeneralMayoristas();
+    this.getEstadisticas();
   }
 
   getVistaGeneralMayoristas() {
@@ -19,6 +22,16 @@ export class DashboardComponent implements OnInit {
       this.multi = data;
     });
   }
+
+  getEstadisticas(){
+    this.dshService.getEstadisticas().subscribe(response => {
+      this.total_mayoristas = Number(response[0]);
+    });
+  }
+
+   // Configuration Grafica Mayoristas - WEB
+
+   
 
     // Configuracion Gráfica General de Mayoristas
 

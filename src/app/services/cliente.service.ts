@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { RestService } from './rest.service';
 import { Cliente } from '../interfaces/Cliente';
-import { SocketService } from './socket.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +15,10 @@ export class ClienteService extends RestService {
 
   registrar(cliente: Cliente){
     return this.http.post<Cliente>(this.baseUrl + '/clientes', cliente);
+  }
+
+  ToList(): Observable<Cliente[]> {
+    return this.http.get<Cliente[]>(this.baseUrl + '/clientes');
   }
 
 }

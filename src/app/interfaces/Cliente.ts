@@ -1,3 +1,5 @@
+import Fuente from "./Fuente";
+
 export interface Cliente {
     id: number,
     nombres: string,
@@ -16,4 +18,5 @@ export interface Cliente {
     vendedor_id: number;
     comentario: string;
     respuesta_vendedor: string;
+    fuente: Fuente;
 }

@@ -1,3 +1,80 @@
-<div class="row my-4">
-    
+<div class="container">
+    <div class="row my-4">
+        <div class="col-11 mx-auto">
+            <nav aria-label="breadcrumb" role="navigation">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a routerLink="/dashboard">Dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Clientes Finales</li>
+                </ol>
+            </nav>
+            <div class="card shadow animate__animated animate__fadeIn">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <h5>Tabla de Cliente Finales</h5>
+                        <ul>
+                            <button class="btn btn-primary" [routerLink]="['/clientes/create']">
+                                <span><i class="fas fa-plus" style="margin-right: 8px;"></i></span>
+                                <span>Registrar Cliente</span>
+                            </button>
+                        </ul>
+                    </div>
+                    <br>
+                    <table class="table" style="font-size: 13px;">
+                        <thead>
+                            <tr>
+                                <th scope="col">Cliente</th>
+                                <th scope="col">Celular</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col">Fuente</th>
+                                <th scope="col">Registro</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let cliente of clientes">
+                                <td>
+                                    <div style="font-weight: 600">{{ cliente.nombres }} {{ cliente.ap_paterno }} {{
+                                        cliente.ap_materno }}</div>
+                                    <div>{{ cliente.correo }}</div>
+                                </td>
+                                <td>{{ cliente.celular }}</td>
+                                <td>
+                                    <div [ngSwitch]="cliente.estado_id">
+                                        <span class="badge badge-primary" *ngSwitchCase="1">Pendiente</span>
+                                        <span class="badge badge-success" *ngSwitchCase="2">Atendido</span>
+                                        <span class="badge badge-danger" *ngSwitchCase="3">Falso</span>
+                                        <span *ngSwitchDefault>Sin especificar</span>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <i [class]="cliente.fuente.icono + ' fuente-icon'"
+                                        [ngStyle]="{'color': cliente.fuente.color}"></i>
+                                </td>
+                                <td>{{ cliente.fecha_solicitud | date:'dd/MM/YYYY' }}</td>
+                                <!-- <td>
+                                        <div class="dropdown">
+                                            <i class="fas fa-cog dropdown-toggle" id="dropdownMenuButton1"
+                                                data-bs-toggle="dropdown" aria-expanded="false"
+                                                style="font-size: 16px; cursor: pointer; margin-right: 5px;"></i>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                <li><a class="dropdown-item"
+                                                        [routerLink]="['/mayoristas/view', mayorista.id]">Ver Información</a>
+                                                </li>
+                                                <li><a class="dropdown-item"
+                                                        [routerLink]="['/mayoristas/edit', mayorista.id]">Editar Información</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td> -->
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- <div class="item" *ngIf="clientes.length == 0">
+                            <ngx-skeleton-loader count="20" appearance="line" [theme]="{ 'min-height': '40px' }">
+                            </ngx-skeleton-loader>
+                        </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
