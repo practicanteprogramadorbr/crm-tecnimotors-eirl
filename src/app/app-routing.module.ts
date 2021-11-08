@@ -7,7 +7,7 @@ import { MayoristasComponent } from './mayoristas/mayoristas.component';
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'login', component: LoginComponent },
-  { path: '', pathMatch: 'full', redirectTo: '/dashboard' }
+  { path: '', pathMatch: 'full', redirectTo: '/mayoristas/list' }
 ];
 
 @NgModule({
