@@ -30,6 +30,7 @@ export class ListMComponent implements OnInit, OnDestroy {
   listar() {
     this.sub1 = this.mayoristaService.listar().subscribe((mayoristas) => {
       this.mayoristas = mayoristas;
+      console.log(this.mayoristas);
     });
   }
 
